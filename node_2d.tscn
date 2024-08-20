@@ -1,12 +1,47 @@
-[gd_scene load_steps=2 format=3 uid="uid://cffqakymief7q"]
+[gd_scene load_steps=7 format=3 uid="uid://cffqakymief7q"]
+
+[ext_resource type="Script" path="res://Mov.gd" id="1_umnta"]
+
+[sub_resource type="TileSet" id="TileSet_hj8eb"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_8n7qp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4obr6"]
+size = Vector2(64, 132)
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_oop6j"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_diw0f"]
+size = Vector2(905, 76)
+
 [node name="Node2D" type="Node2D"]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+visible = false
+position = Vector2(10, 134)
+scale = Vector2(2, 2)
+tile_set = SubResource("TileSet_hj8eb")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(-8.00009, 182)
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+script = ExtResource("1_umnta")
+Velocity = 1.7
+
+[node name="Sprite2D2" type="Sprite2D" parent="CharacterBody2D"]
+scale = Vector2(63.5, 132.5)
+texture = SubResource("CanvasTexture_8n7qp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+shape = SubResource("RectangleShape2D_4obr6")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
+position = Vector2(10, 134)
 scale = Vector2(905.5, 77.5)
 texture = SubResource("CanvasTexture_oop6j")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(9.5, 133)
+shape = SubResource("RectangleShape2D_diw0f")
