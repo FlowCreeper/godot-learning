@@ -11,6 +11,8 @@ var doubleTapTime = doubleTapDelay
 var lastKey = 0
 var oldPosition = Vector2.ZERO
 var canStop:bool
+var dashTime = 1
+@export var airDashCount = 0
  
 	 
 # Called when the node enters the scene tree for the first time.
@@ -25,10 +27,12 @@ func _process(delta: float) -> void:
 		direction.x += 1
 	if Input.is_action_pressed("MoveL"):	
 		direction.x -= 1
-	
+	if is_on_floor():
+		airDashCount = 0
 	position.x += direction.x * delta * Velocity * 100
 	
 	doubleTapTime -= delta
+	dashTime -=delta
 	
 
 func _physics_process(delta: float) -> void:
@@ -52,16 +56,39 @@ func _unhandled_input(event: InputEvent) -> void:
 		
 		print(event.get_keycode_with_modifiers())
 		if lastKey == event.get_keycode_with_modifiers() and doubleTapTime > 0:
-			oldPosition = position
+			
+			print(lastKey)
 			print("Double")
-			if lastKey == 68:
-				velocity.x = 0.1 * Velocity *1000
-				move_and_slide()
-				print(position.x ," ", oldPosition.x)
-				if position.x == oldPosition.x + 10: 
-					velocity.x = 10000 * Velocity * 1000
+			match  lastKey:
+				68 when is_on_floor():
+					velocity.x = 2 * Velocity *1000
+					move_and_slide()
+					if dashTime > 0:
+						velocity.x = 0.1 * Velocity * 1000
+				68 when !is_on_floor():
+					if  airDashCount<1:
+						velocity.x = 2 * Velocity *1000
+						move_and_slide()
+						velocity.x = 0
+						airDashCount += 1
+						print(airDashCount)
+				65  when is_on_floor():
+					velocity.x = -2 * Velocity *1000
+					move_and_slide()
+					if dashTime > 0:
+						velocity.x = -0.1 * Velocity * 1000
+				65 when !is_on_floor():
+					if  airDashCount<1:
+						velocity.x = -2 * Velocity *1000
+						move_and_slide()
+						velocity.x = 0
+						airDashCount += 1
+			
+		
 	elif event is InputEventKey and event.is_released():
+		
+		dashTime = 1
+		velocity.x = 0 
+	if Input.is_action_just_pressed("MoveR") or Input.is_action_just_pressed("MoveL"):
 		lastKey = event.get_keycode_with_modifiers()
 		doubleTapTime = doubleTapDelay
-		velocity.x = 0 
-		
