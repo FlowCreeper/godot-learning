@@ -14,39 +14,40 @@ size = Vector2(64, 132)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_diw0f"]
 size = Vector2(905, 76)
 
-[node name="Node2D" type="Node2D"]
+[node name="Node" type="Node"]
 
-[node name="TileMapLayer" type="TileMapLayer" parent="."]
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="Node2D"]
 visible = false
 position = Vector2(10, 134)
 scale = Vector2(2, 2)
 tile_set = SubResource("TileSet_hj8eb")
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="Node2D"]
 
-[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+[node name="CharacterBody2D" type="CharacterBody2D" parent="Node2D"]
 script = ExtResource("1_umnta")
 Velocity = 1.7
 jump = 500.0
 
-[node name="Sprite2D2" type="Sprite2D" parent="CharacterBody2D"]
+[node name="Sprite2D2" type="Sprite2D" parent="Node2D/CharacterBody2D"]
 scale = Vector2(63.5, 132.5)
 texture = SubResource("CanvasTexture_8n7qp")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/CharacterBody2D"]
 shape = SubResource("RectangleShape2D_4obr6")
 
-[node name="Timer" type="Timer" parent="CharacterBody2D"]
-wait_time = 0.3
+[node name="Timer" type="Timer" parent="Node2D/CharacterBody2D"]
 one_shot = true
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
+[node name="StaticBody2D" type="StaticBody2D" parent="Node2D"]
 
-[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
-position = Vector2(0, 134)
+[node name="Sprite2D" type="Sprite2D" parent="Node2D/StaticBody2D"]
+position = Vector2(10, 134)
 scale = Vector2(905.5, 77.5)
 texture = SubResource("CanvasTexture_oop6j")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(0, 133)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/StaticBody2D"]
+position = Vector2(9.5, 133)
 shape = SubResource("RectangleShape2D_diw0f")

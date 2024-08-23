@@ -37,16 +37,15 @@ texture = SubResource("CanvasTexture_8n7qp")
 shape = SubResource("RectangleShape2D_4obr6")
 
 [node name="Timer" type="Timer" parent="CharacterBody2D"]
-wait_time = 0.3
 one_shot = true
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
 [node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
-position = Vector2(0, 134)
+position = Vector2(10, 134)
 scale = Vector2(905.5, 77.5)
 texture = SubResource("CanvasTexture_oop6j")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(0, 133)
+position = Vector2(9.5, 133)
 shape = SubResource("RectangleShape2D_diw0f")
