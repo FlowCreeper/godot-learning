@@ -89,6 +89,54 @@ func _unhandled_input(event: InputEvent) -> void:
 		
 		dashTime = 1
 		velocity.x = 0 
-	if Input.is_action_just_pressed("MoveR") or Input.is_action_just_pressed("MoveL"):
-		lastKey = event.get_keycode_with_modifiers()
-		doubleTapTime = doubleTapDelay
+	if event is InputEventKey:
+		if event.is_action_pressed("MoveR") or event.is_action_pressed("MoveL"):
+			lastKey = event.get_keycode_with_modifiers()
+			doubleTapTime = doubleTapDelay
+	if event is InputEventJoypadButton and event.is_pressed():
+		if event is InputEventJoypadButton and event.is_pressed():
+			print(event.button_index)
+		
+			
+		if lastKey == event.button_index and doubleTapTime > 0:
+			
+			print(lastKey)
+			print("Double")
+			match  event.button_index:
+				14 when is_on_floor():
+					velocity.x = 2 * Velocity *1000
+					move_and_slide()
+					if dashTime > 0:
+						velocity.x = 0.1 * Velocity * 1000
+				14 when !is_on_floor():
+					if  airDashCount<1:
+						velocity.x = 2 * Velocity *1000
+						move_and_slide()
+						velocity.x = 0
+						airDashCount += 1
+						print(airDashCount)
+				13  when is_on_floor():
+					velocity.x = -2 * Velocity *1000
+					move_and_slide()
+					if dashTime > 0:
+						velocity.x = -0.1 * Velocity * 1000
+				13 when !is_on_floor():
+					if  airDashCount<1:
+						velocity.x = -2 * Velocity *1000
+						move_and_slide()
+						velocity.x = 0
+						airDashCount += 1
+			
+		
+	elif event is InputEventJoypadButton and event.is_released():
+		
+		dashTime = 1
+		velocity.x = 0 
+	if event is InputEventKey:
+		if event.is_action_pressed("MoveR") or event.is_action_pressed("MoveL"):
+			lastKey = event.get_keycode_with_modifiers()
+			doubleTapTime = doubleTapDelay
+	if event is InputEventJoypadButton:
+		if event.is_action_pressed("MoveR") or event.is_action_pressed("MoveL"):
+			lastKey = event.button_index
+			doubleTapTime = doubleTapDelay
