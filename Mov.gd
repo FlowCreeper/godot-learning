@@ -13,13 +13,17 @@ var oldPosition = Vector2.ZERO
 var canStop:bool
 var dashTime = 1
 @export var airDashCount = 0
+@onready var animatedSprite = get_tree().get_root().get_node("Node2D").get_child(5)
+@onready var child = get_tree().get_root().get_node("Node2D").get_child(5)
+var smokeChild = get_child(3)
  
 	 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	timer = get_node("Timer") # Replace with function body.
-
-
+	print(get_child(3))
+	
+	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	direction = Vector2.ZERO 
@@ -42,10 +46,16 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("Jump") and is_on_floor():
 		velocity.y = -jump
 		print(velocity.y)
-	
 		
-		
-	
+		child.global_position = position
+		print(child.global_position)
+		print(position)
+		print(get_tree().get_root().get_node("Node2D").get_child(0))
+		animatedSprite.play("default")
+	if !animatedSprite.is_playing():
+		animatedSprite.visible = false
+	else:
+		animatedSprite.visible = true
 	
 	
 	move_and_slide()

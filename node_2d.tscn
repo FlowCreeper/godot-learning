@@ -1,6 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://cffqakymief7q"]
+[gd_scene load_steps=11 format=3 uid="uid://cffqakymief7q"]
 
 [ext_resource type="Script" path="res://Mov.gd" id="1_umnta"]
+[ext_resource type="SpriteFrames" uid="uid://blsglbx1xarum" path="res://JumpLanding.tres" id="2_1x54s"]
+[ext_resource type="Material" uid="uid://cp82e3n13hp0w" path="res://Jump.tres" id="3_hnt40"]
+[ext_resource type="Texture2D" uid="uid://862y6yx8vgcu" path="res://Sprite-0001.png" id="4_e15pv"]
 
 [sub_resource type="TileSet" id="TileSet_hj8eb"]
 
@@ -13,6 +16,12 @@ size = Vector2(64, 132)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_diw0f"]
 size = Vector2(905, 76)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_whcpe"]
+particles_animation = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = true
 
 [node name="Node2D" type="Node2D"]
 
@@ -50,3 +59,18 @@ texture = SubResource("CanvasTexture_oop6j")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(0, 133)
 shape = SubResource("RectangleShape2D_diw0f")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+texture_filter = 1
+material = SubResource("CanvasItemMaterial_whcpe")
+emitting = false
+process_material = ExtResource("3_hnt40")
+texture = ExtResource("4_e15pv")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(0, 28.96)
+scale = Vector2(4, 4)
+sprite_frames = ExtResource("2_1x54s")
+speed_scale = 2.0
+offset = Vector2(0, -10.5)
