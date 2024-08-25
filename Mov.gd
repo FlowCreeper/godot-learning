@@ -13,9 +13,9 @@ var oldPosition = Vector2.ZERO
 var canStop:bool
 var dashTime = 1
 @export var airDashCount = 0
-@onready var animatedSprite = get_tree().get_root().get_node("Node2D").get_child(5)
-@onready var child = get_tree().get_root().get_node("Node2D").get_child(5)
-var smokeChild = get_child(3)
+@onready var animatedSprite = get_tree().get_root().get_node("Node2D").get_child(6)
+@onready var child = get_tree().get_root().get_node("Node2D").get_child(6)
+var smokeChild = get_child(4)
  
 	 
 # Called when the node enters the scene tree for the first time.

@@ -44,3 +44,7 @@ DashR={
 "deadzone": 0.5,
 "events": []
 }
+
+[physics]
+
+2d/default_gravity=1750.0

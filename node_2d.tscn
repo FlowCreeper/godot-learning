@@ -1,5 +1,6 @@
-[gd_scene load_steps=11 format=3 uid="uid://cffqakymief7q"]
+[gd_scene load_steps=12 format=3 uid="uid://cffqakymief7q"]
 
+[ext_resource type="Texture2D" uid="uid://c78sjnj1nxw5b" path="res://Stage1.png" id="1_amipb"]
 [ext_resource type="Script" path="res://Mov.gd" id="1_umnta"]
 [ext_resource type="SpriteFrames" uid="uid://blsglbx1xarum" path="res://JumpLanding.tres" id="2_1x54s"]
 [ext_resource type="Material" uid="uid://cp82e3n13hp0w" path="res://Jump.tres" id="3_hnt40"]
@@ -25,6 +26,11 @@ particles_anim_loop = true
 
 [node name="Node2D" type="Node2D"]
 
+[node name="Stage1" type="Sprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(2, 2)
+texture = ExtResource("1_amipb")
+
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 visible = false
 position = Vector2(10, 134)
@@ -36,7 +42,7 @@ tile_set = SubResource("TileSet_hj8eb")
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
 script = ExtResource("1_umnta")
 Velocity = 1.7
-jump = 500.0
+jump = 750.0
 
 [node name="Sprite2D2" type="Sprite2D" parent="CharacterBody2D"]
 scale = Vector2(63.5, 132.5)
@@ -50,8 +56,11 @@ wait_time = 0.3
 one_shot = true
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(0, 150)
+scale = Vector2(2, 1)
 
 [node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
+visible = false
 position = Vector2(0, 134)
 scale = Vector2(905.5, 77.5)
 texture = SubResource("CanvasTexture_oop6j")
@@ -70,7 +79,7 @@ texture = ExtResource("4_e15pv")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 position = Vector2(0, 28.96)
-scale = Vector2(4, 4)
+scale = Vector2(2, 2)
 sprite_frames = ExtResource("2_1x54s")
 speed_scale = 2.0
-offset = Vector2(0, -10.5)
+offset = Vector2(0, 4)
